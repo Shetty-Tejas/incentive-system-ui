@@ -4,8 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-select/dist/css/bootstrap-select.css";
+import "bootstrap-select/dist/js/bootstrap-select";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "@popperjs/core/dist/cjs/popper";
+import "react-input-range/lib/css/index.css";
 
 ReactDOM.render(
   <React.StrictMode>

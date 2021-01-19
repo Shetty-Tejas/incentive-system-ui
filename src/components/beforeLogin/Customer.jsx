@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import CustomerHeader from "./CustomerHeader";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CustomerHeader from "./CustomerHeader";
 import Login from "./Login";
+import Register from "./Register";
 
 class Customer extends Component {
   constructor(props) {
@@ -25,11 +26,11 @@ class Customer extends Component {
           </Route>
           <Route exact path="/dealerReg">
             <CustomerHeader />
-            <Login mode={this.state.dealer} />
+            <Register mode={this.state.dealer} />
           </Route>
           <Route exact path="/manufacturerReg">
             <CustomerHeader />
-            <Login mode={this.state.dealer} />
+            <Register mode={this.state.manufacturer} />
           </Route>
         </Switch>
       </Router>

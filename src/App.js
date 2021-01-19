@@ -1,9 +1,11 @@
 import "./App.css";
-import Customer from "./components/Customer";
+import Dealer from "./components/afterLogin/Dealer";
+import Customer from "./components/beforeLogin/Customer";
 
 function App() {
   return (
     <div className="App">
+      <Dealer />
       <Customer />
     </div>
   );
