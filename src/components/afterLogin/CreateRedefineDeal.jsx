@@ -4,7 +4,7 @@ import InputRange from "react-input-range";
 class CreateRedefineDeal extends Component {
   constructor(props) {
     super(props);
-    this.state = { mode: "", value: { min: 2, max: 10 } };
+    this.state = { mode: "", incRange: { min: 2, max: 10 } };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -36,18 +36,21 @@ class CreateRedefineDeal extends Component {
           </h5>
         </div>
         <div className="row justify-content-center">
-          <div className="col-6 table-responsive">
+          <div className="col-9 table-responsive">
             <form>
               <table className="table table-borderless">
                 <tbody>
                   <tr>
-                    <td className="align-bottom col-12">
+                    <td className="align-bottom">
                       <label htmlFor="name">
-                        <h4 className="font-weight-light">{this.chooser("Car", "Deal")} Model:</h4>
+                        <h4 className="font-weight-light">
+                          {this.chooser("Car", "Deal")} Model:
+                        </h4>
                       </label>
                     </td>
                     <td>
                       <select
+                        data-width="30vw"
                         className="selectpicker"
                         data-live-search="true"
                         data-size="3"
@@ -70,8 +73,8 @@ class CreateRedefineDeal extends Component {
                       <InputRange
                         maxValue={100}
                         minValue={0}
-                        value={this.state.value}
-                        onChange={(value) => this.setState({ value: value })}
+                        value={this.state.incRange}
+                        onChange={(value) => this.setState({ incRange: value })}
                       />
                     </td>
                   </tr>

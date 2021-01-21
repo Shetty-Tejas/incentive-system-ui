@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CreateRedefineDeal from "./CreateRedefineDeal";
 import DealerHeader from "./DealerHeader";
+import FetchAllDeal from "./FetchAllDeal";
+import FetchCustomer from "./FetchCustomer";
+import RecordIncentive from "./RecordIncentive";
 
 class Dealer extends Component {
   constructor(props) {
@@ -10,7 +13,7 @@ class Dealer extends Component {
   }
   render() {
     return (
-      <Router>
+      <Router forceRefresh>
         <Switch>
           <Route exact path="/dealer/createDeals">
             <DealerHeader />
@@ -21,16 +24,16 @@ class Dealer extends Component {
             <CreateRedefineDeal mode={this.state.redefine} />
           </Route>
           <Route exact path="/dealer/fetchAllDeals">
-            World
+            <DealerHeader />
+            <FetchAllDeal />
           </Route>
           <Route exact path="/dealer/recordIncentive">
-            Hello
+            <DealerHeader />
+            <RecordIncentive />
           </Route>
-          <Route exact path="/dealer/fetchCustomerById">
-            World
-          </Route>
-          <Route exact path="/dealer/fetchCustomerByContact">
-            Hello
+          <Route exact path="/dealer/fetchCustomer">
+            <DealerHeader />
+            <FetchCustomer />
           </Route>
           <Route exact path="/dealer/fetchIncentiveRecords">
             World

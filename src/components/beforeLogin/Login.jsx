@@ -30,7 +30,7 @@ export default class Login extends Component {
           <h5 className="font-weight-light">Please log-in to continue!</h5>
         </div>
         <div className="row justify-content-center">
-          <div className="col-6 table-responsive">
+          <div className="col-9 table-responsive">
             <form>
               <table className="table table-borderless">
                 <tbody>

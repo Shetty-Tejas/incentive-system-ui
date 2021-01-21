@@ -65,74 +65,77 @@ class Register extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="row justify-content-center">
-          <h1 className="font-weight-light">Welcome {this.state.mode}!</h1>
-        </div>
-        <div className="row justify-content-center">
-          <h5 className="font-weight-light">Please register to continue!</h5>
-        </div>
-        <div className="row justify-content-center">
-          <div className="col-6 table-responsive">
-            <form>
-              <table className="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td className="align-bottom">
-                      <label htmlFor="name">
-                        <h4 className="font-weight-light">
-                          {this.state.mode} Name:
-                        </h4>
-                      </label>
-                    </td>
-                    <td>
-                      <input
-                        className="form-control input-sm"
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Name goes here! Ex. John Doe"
-                        required
-                        autoFocus
-                      />
-                    </td>
-                  </tr>
-                  {this.inputGenerator()}
-                  <tr>
-                    <td className="align-bottom">
-                      <label htmlFor="pass">
-                        <h4 className="font-weight-light">Password:</h4>
-                      </label>
-                    </td>
-                    <td>
-                      <input
-                        className="form-control input-sm"
-                        type="password"
-                        id="pass"
-                        name="pass"
-                        placeholder="Password goes here! Ex. pass1234"
-                        required
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan="2">
-                      <input
-                        type="button"
-                        className="btn btn-primary"
-                        value="Submit"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </form>
+        <div>
+          <div className="row justify-content-center">
+            <h1 className="font-weight-light">Welcome {this.state.mode}!</h1>
           </div>
-        </div>
-        <div className="row justify-content-center">
-          <h6 className="font-weight-light">
-            Already have an account?&nbsp;
-            <Link to={this.regRouter}>Please login.</Link>
-          </h6>
+          <div className="row justify-content-center">
+            <h5 className="font-weight-light">Please register to continue!</h5>
+          </div>
+          <div className="row justify-content-center">
+            <div className="col-9 table-responsive">
+              <form>
+                <table className="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <td className="align-bottom">
+                        <label htmlFor="name">
+                          <h4 className="font-weight-light">
+                            {this.state.mode} Name
+                            <span className="required">*</span>:
+                          </h4>
+                        </label>
+                      </td>
+                      <td>
+                        <input
+                          className="form-control input-sm"
+                          type="text"
+                          id="name"
+                          name="name"
+                          placeholder="Name goes here! Ex. John Doe"
+                          required
+                          autoFocus
+                        />
+                      </td>
+                    </tr>
+                    {this.inputGenerator()}
+                    <tr>
+                      <td className="align-bottom">
+                        <label htmlFor="pass">
+                          <h4 className="font-weight-light">Password:</h4>
+                        </label>
+                      </td>
+                      <td>
+                        <input
+                          className="form-control input-sm"
+                          type="password"
+                          id="pass"
+                          name="pass"
+                          placeholder="Password goes here! Ex. pass1234"
+                          required
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <input
+                          type="button"
+                          className="btn btn-primary"
+                          value="Submit"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+          <div className="row justify-content-center">
+            <h6 className="font-weight-light">
+              Already have an account?&nbsp;
+              <Link to={this.regRouter}>Please login.</Link>
+            </h6>
+          </div>
         </div>
       </div>
     );

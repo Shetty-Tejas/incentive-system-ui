@@ -47,6 +47,24 @@ export default function DealerHeader() {
               Fetch all Deals
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/dealer/recordIncentive"
+            >
+              Record Incentive
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/dealer/fetchCustomer"
+            >
+              Fetch Customer
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>

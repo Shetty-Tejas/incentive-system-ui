@@ -11,7 +11,7 @@ class Customer extends Component {
   }
   render() {
     return (
-      <Router>
+      <Router forceRefresh>
         <Switch>
           <Route exact path="/">
             <CustomerHeader />
