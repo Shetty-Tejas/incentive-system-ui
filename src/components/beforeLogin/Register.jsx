@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 class Register extends Component {
   constructor(props) {
@@ -142,4 +143,7 @@ class Register extends Component {
   }
 }
 
+Register.propTypes = {
+  mode: PropTypes.string.isRequired
+};
 export default Register;

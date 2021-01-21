@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import InputRange from "react-input-range";
+import PropTypes from "prop-types";
 
 class CreateRedefineDeal extends Component {
   constructor(props) {
@@ -50,8 +51,8 @@ class CreateRedefineDeal extends Component {
                     </td>
                     <td>
                       <select
-                        data-width="30vw"
-                        className="selectpicker"
+                        style={{ width: "30vw" }}
+                        className="form-control"
                         data-live-search="true"
                         data-size="3"
                       >
@@ -97,4 +98,7 @@ class CreateRedefineDeal extends Component {
   }
 }
 
+CreateRedefineDeal.propTypes = {
+  mode: PropTypes.string.isRequired
+};
 export default CreateRedefineDeal;

@@ -3,17 +3,8 @@ import React, { Component } from "react";
 class InsertCar extends Component{
     constructor(props){
         super(props)
-        this.state = {mode: "" };
+        this.state = { };
     }
-
-    static getDerivedStateFromProps(props, state) {
-        /* if (props.mode !== state.mode) {
-          return {
-            mode: props.mode
-          };
-        }
-        return null; */
-      }
 
     render (){
         return (
@@ -23,7 +14,7 @@ class InsertCar extends Component{
               </div>
             <div className="row justify-content-center">
               <div className="col-6 table-responsive">
-                <form class="row g-3">
+                <form>
                   <table className="table table-borderless">
                     <tbody>
                       <tr>

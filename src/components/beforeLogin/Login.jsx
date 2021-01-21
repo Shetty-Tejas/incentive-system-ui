@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logIn } from "../../actions/actions";
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = { mode: "" };
+    this.history = this.props.history;
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -15,11 +19,24 @@ export default class Login extends Component {
     }
     return null;
   }
+
+  handleChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  handleSubmit = () => {
+    const id = parseInt(this.state.id);
+    const pass = this.state.pass;
+    const obj = { id: id, pass: pass };
+    console.log(this.props.history);
+    this.props.logIn(obj, this.state.mode, this.history); //
+  };
+
   regRouter = () => {
     if (this.state.mode === "Dealer") return "/dealerReg";
     else if (this.state.mode === "Manufacturer") return "/manufacturerReg";
     else return "/";
   };
+
   render() {
     return (
       <div className="container-fluid">
@@ -30,8 +47,8 @@ export default class Login extends Component {
           <h5 className="font-weight-light">Please log-in to continue!</h5>
         </div>
         <div className="row justify-content-center">
-          <div className="col-9 table-responsive">
-            <form>
+          <div className="col-7 table-responsive">
+            <form method="post">
               <table className="table table-borderless">
                 <tbody>
                   <tr>
@@ -51,6 +68,7 @@ export default class Login extends Component {
                         placeholder="ID goes here! Ex. 1"
                         required
                         autoFocus
+                        onChange={this.handleChange}
                       />
                     </td>
                   </tr>
@@ -68,6 +86,7 @@ export default class Login extends Component {
                         name="pass"
                         placeholder="Password goes here! Ex. pass"
                         required
+                        onChange={this.handleChange}
                       />
                     </td>
                   </tr>
@@ -77,6 +96,7 @@ export default class Login extends Component {
                         type="button"
                         className="btn btn-primary"
                         value="Submit"
+                        onClick={this.handleSubmit}
                       />
                     </td>
                   </tr>
@@ -87,7 +107,7 @@ export default class Login extends Component {
         </div>
         <div className="row justify-content-center">
           <h6 className="font-weight-light">
-            Don't have an account?&nbsp;
+            Don&apos;t have an account?&nbsp;
             <Link to={this.regRouter}>Please register.</Link>
           </h6>
         </div>
@@ -95,3 +115,10 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  logIn: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  mode: PropTypes.string.isRequired
+};
+export default connect(null, { logIn })(Login);

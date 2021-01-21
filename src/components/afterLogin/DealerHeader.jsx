@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export default function DealerHeader() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/">
+      <a className="navbar-brand" href="/dealer/">
         Incentive System for Car Dealers
       </a>
       <button

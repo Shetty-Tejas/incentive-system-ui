@@ -93,8 +93,8 @@ class RecordIncentive extends Component {
                   </td>
                   <td>
                     <select
-                      data-width="100%"
-                      className="selectpicker"
+                      style={{ width: "100%" }}
+                      className="form-control"
                       data-live-search="true"
                       data-size="3"
                     >

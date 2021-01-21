@@ -5,10 +5,6 @@ class AlterStatus extends Component {
     super(props);
     this.state = { mode: "" };
   }
-
-  static getDerivedStateFromProps(props, state) {
-    return null;
-  }
   tableRender = () => {
     return true;
   };
