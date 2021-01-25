@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable implicit-arrow-linebreak */
 import axios from "axios";
 import {
@@ -55,7 +56,7 @@ export const fetchDeals = (object, mode) => async (dispatch) => {
     .get(mode === "dealer" ? dFetch : mFetch)
     .then((res) => {
       dispatch({ type: CLEAN_ERRORS });
-      return dispatch({ type: FETCH_DEALS, payload: res.data });
+      dispatch({ type: FETCH_DEALS, payload: res.data });
     })
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
@@ -98,7 +99,7 @@ export const redefineDeal = (object, history) => async (dispatch) => {
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
-export const deleteDeal = (object) => async (dispatch) => {
+export const deleteDeal = (object, callback) => async (dispatch) => {
   const { oId, oModel } = object;
   const deleteUrl = `${BASE_URL}/dealer/logged/deleteDeals?dId=${oId}&dealModel=${oModel}`;
   await axios
@@ -108,4 +109,5 @@ export const deleteDeal = (object) => async (dispatch) => {
       return dispatch({ type: DELETE_DEAL });
     })
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+  return callback();
 };

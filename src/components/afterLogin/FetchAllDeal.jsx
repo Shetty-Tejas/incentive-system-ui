@@ -1,12 +1,9 @@
-/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-undefined */
+/* eslint-disable no-invalid-this */
 /* eslint-disable no-alert */
 /* eslint-disable function-paren-newline */
 /* eslint-disable no-extra-parens */
 /* eslint-disable no-plusplus */
-/* eslint-disable no-invalid-this */
-/* eslint-disable no-console */
-/* eslint-disable no-undefined */
-/* eslint-disable max-statements */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -16,18 +13,16 @@ class FetchAllDeal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: props.mode
+      mode: props.mode,
+      deals: []
     };
     props.fetchDeals(props.states.loggedId, this.state.mode);
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.mode !== state.mode) {
-      return {
-        mode: props.mode
-      };
+    if (props.states.deals !== state.deals) {
+      return { deals: props.states.deals };
     }
-
     if (props.states.loggedId !== state.loggedId) {
       return {
         loggedId: props.states.loggedId
@@ -56,20 +51,18 @@ class FetchAllDeal extends Component {
     const oId = id;
     const oModel = model;
     const object = { oModel, oId };
-    console.log(object);
     if (this.state.loggedId === undefined) {
       alert("Please log in before continuing!");
       this.props.history.push("/");
     } else {
-      this.props.deleteDeal(object);
+      this.props.deleteDeal(object, () => this.props.fetchDeals(oId, "dealer"));
     }
-    this.props.fetchDeals(oId, "dealer");
   };
 
   renderTable = () => {
     if (this.state.mode === "dealer") {
       let count = 0;
-      return this.props.states.deals.map((element) => (
+      return this.state.deals.map((element) => (
         <tr key={element.dealModel}>
           <td>{++count}</td>
           <td>{element.dealModel}</td>
@@ -83,9 +76,9 @@ class FetchAllDeal extends Component {
               type="button"
               value="Delete"
               className="btn btn-danger"
-              onClick={() =>
-                this.handleDelete(this.state.loggedId, element.dealModel)
-              }
+              onClick={() => {
+                this.handleDelete(this.state.loggedId, element.dealModel);
+              }}
             />
           </td>
         </tr>
