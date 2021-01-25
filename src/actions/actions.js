@@ -98,14 +98,13 @@ export const redefineDeal = (object, history) => async (dispatch) => {
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
-export const deleteDeal = (object, history) => async (dispatch) => {
+export const deleteDeal = (object) => async (dispatch) => {
   const { oId, oModel } = object;
   const deleteUrl = `${BASE_URL}/dealer/logged/deleteDeals?dId=${oId}&dealModel=${oModel}`;
   await axios
     .post(deleteUrl)
     .then(() => {
       dispatch({ type: CLEAN_ERRORS });
-      history.push("/dealer/fetchAllDeals");
       return dispatch({ type: DELETE_DEAL });
     })
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));

@@ -46,7 +46,7 @@ class CreateRedefineDeal extends Component {
     }
 
     if (props.states.loggedId !== undefined && !state.fetched) {
-      props.fetchCars(props.states.loggedId, props.states.mode);
+      props.fetchCars(props.states.loggedId, props.states.loggedInMode);
       props.fetchDeals(props.states.loggedId, "dealer");
       return { fetched: true };
     }
@@ -90,8 +90,12 @@ class CreateRedefineDeal extends Component {
 
   selectRenderer = () => {
     if (
-      this.props.states.cars === undefined &&
-      this.props.states.deals === undefined
+      (this.props.states.cars === undefined ||
+        this.props.states.cars === null ||
+        this.props.states.cars === []) &&
+      (this.props.states.deals === undefined ||
+        this.props.states.deals === null ||
+        this.props.states.deals === [])
     ) {
       return (
         <option value="">No {this.chooser("Cars", "Deals")} Available</option>

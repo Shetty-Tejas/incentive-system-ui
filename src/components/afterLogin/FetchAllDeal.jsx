@@ -16,7 +16,7 @@ class FetchAllDeal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: ""
+      mode: props.mode
     };
     props.fetchDeals(props.states.loggedId, this.state.mode);
   }
@@ -61,9 +61,9 @@ class FetchAllDeal extends Component {
       alert("Please log in before continuing!");
       this.props.history.push("/");
     } else {
-      this.props.deleteDeal(object, this.props.history);
-      this.props.fetchDeals(this.props.states.loggedId, this.state.mode);
+      this.props.deleteDeal(object);
     }
+    this.props.fetchDeals(oId, "dealer");
   };
 
   renderTable = () => {
