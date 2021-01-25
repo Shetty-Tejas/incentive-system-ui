@@ -8,9 +8,10 @@ import PropTypes from "prop-types";
 class Customer extends Component {
   constructor(props) {
     super(props);
-    this.state = { dealer: "Dealer", manufacturer: "Manufacturer" };
+    this.state = { manufacturer: "Manufacturer", dealer: "Dealer" };
     this.history = this.props.history;
   }
+
   render() {
     return (
       <Switch>

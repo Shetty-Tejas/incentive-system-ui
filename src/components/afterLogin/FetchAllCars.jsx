@@ -52,12 +52,6 @@ class FetchAllCars extends Component {
             </form>
           </div>
         </div>
-        {/* <div className="row justify-content-center">
-            <h6 className="font-weight-light">
-                Don't have an account?&nbsp;
-                <Link to={this.regRouter}>Please register.</Link>
-            </h6>
-            </div> */}
       </div>
     );
   }

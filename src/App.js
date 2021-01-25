@@ -11,7 +11,7 @@ function App() {
   const history = useHistory();
   return (
     <Provider store={store}>
-      <Dealer />
+      <Dealer history={history} />
       <Customer history={history} />
       <Manufacturer />
     </Provider>

@@ -1,3 +1,5 @@
+/* eslint-disable no-invalid-this */
+/* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -16,13 +18,18 @@ class Register extends Component {
     }
     return null;
   }
+
   regRouter = () => {
-    if (this.state.mode === "Dealer") return "/dealerSignIn";
-    else if (this.state.mode === "Manufacturer") return "/manufacturerSignIn";
-    else return "/";
+    if (this.state.mode === "Dealer") {
+      return "/dealerSignIn";
+    } else if (this.state.mode === "Manufacturer") {
+      return "/manufacturerSignIn";
+    }
+    return "/";
   };
+
   inputGenerator = () => {
-    if (this.state.mode === "Dealer")
+    if (this.state.mode === "Dealer") {
       return (
         <tr>
           <td className="align-bottom">
@@ -42,7 +49,7 @@ class Register extends Component {
           </td>
         </tr>
       );
-    else if (this.state.mode === "Manufacturer")
+    } else if (this.state.mode === "Manufacturer") {
       return (
         <tr>
           <td className="align-bottom">
@@ -62,7 +69,10 @@ class Register extends Component {
           </td>
         </tr>
       );
+    }
+    return null;
   };
+
   render() {
     return (
       <div className="container-fluid">

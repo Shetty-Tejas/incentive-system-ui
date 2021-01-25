@@ -9,6 +9,7 @@ class Manufacturer extends Component {
     super(props);
     this.state = { insert: "insert" };
   }
+
   render() {
     return (
       <Switch>

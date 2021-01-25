@@ -5,9 +5,9 @@ class AlterStatus extends Component {
     super(props);
     this.state = { mode: "" };
   }
-  tableRender = () => {
-    return true;
-  };
+
+  tableRender = () => true;
+
   render() {
     return (
       <div className="container-fluid">

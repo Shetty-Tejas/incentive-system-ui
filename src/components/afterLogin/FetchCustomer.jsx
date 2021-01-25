@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component } from "react";
 
 class FetchCustomer extends Component {
@@ -5,8 +6,9 @@ class FetchCustomer extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
-    return <div />;
+    return <div>Hello</div>;
   }
 }
 

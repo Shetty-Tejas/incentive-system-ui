@@ -1,13 +1,23 @@
+/* eslint-disable no-alert */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-invalid-this */
+/* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/actions";
+import classnames from "classnames";
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { mode: "" };
+    this.state = {
+      pass: "",
+      mode: "",
+      id: 0,
+      errors: { error: "" }
+    };
     this.history = this.props.history;
   }
 
@@ -17,6 +27,11 @@ class Login extends Component {
         mode: props.mode
       };
     }
+    if (props.errors !== state.errors) {
+      return {
+        errors: props.errors
+      };
+    }
     return null;
   }
 
@@ -24,17 +39,24 @@ class Login extends Component {
     this.setState({ [event.target.name]: event.target.value });
 
   handleSubmit = () => {
-    const id = parseInt(this.state.id);
-    const pass = this.state.pass;
-    const obj = { id: id, pass: pass };
-    console.log(this.props.history);
-    this.props.logIn(obj, this.state.mode, this.history); //
+    const pattern = /^[a-zA-Z0-9|_|$|\\.|@]+$/;
+    const { id, pass } = this.state;
+    const validation = 0;
+    if (parseInt(id, 10) > validation && pattern.test(pass)) {
+      const obj = { pass: pass.trim(), id: parseInt(id, 10) };
+      this.props.logIn(obj, this.state.mode, this.history);
+    } else {
+      alert("Please fill in the valid values!");
+    }
   };
 
   regRouter = () => {
-    if (this.state.mode === "Dealer") return "/dealerReg";
-    else if (this.state.mode === "Manufacturer") return "/manufacturerReg";
-    else return "/";
+    if (this.state.mode === "Dealer") {
+      return "/dealerReg";
+    } else if (this.state.mode === "Manufacturer") {
+      return "/manufacturerReg";
+    }
+    return "/";
   };
 
   render() {
@@ -55,13 +77,16 @@ class Login extends Component {
                     <td className="align-bottom">
                       <label htmlFor="id">
                         <h4 className="font-weight-light">
-                          {this.state.mode} ID:
+                          {this.state.mode} ID
+                          <span className="required">*</span>:
                         </h4>
                       </label>
                     </td>
                     <td>
                       <input
-                        className="form-control input-sm"
+                        className={classnames("form-control input-sm", {
+                          "is-invalid": this.state.errors.error
+                        })}
                         type="number"
                         id="id"
                         name="id"
@@ -75,12 +100,16 @@ class Login extends Component {
                   <tr>
                     <td className="align-bottom">
                       <label htmlFor="pass">
-                        <h4 className="font-weight-light">Password:</h4>
+                        <h4 className="font-weight-light">
+                          Password<span className="required">*</span>:
+                        </h4>
                       </label>
                     </td>
                     <td>
                       <input
-                        className="form-control input-sm"
+                        className={classnames("form-control input-sm", {
+                          "is-invalid": this.state.errors.error
+                        })}
                         type="password"
                         id="pass"
                         name="pass"
@@ -106,6 +135,9 @@ class Login extends Component {
           </div>
         </div>
         <div className="row justify-content-center">
+          <h4 className="font-weight-light">{this.state.errors.error}</h4>
+        </div>
+        <div className="row justify-content-center">
           <h6 className="font-weight-light">
             Don&apos;t have an account?&nbsp;
             <Link to={this.regRouter}>Please register.</Link>
@@ -117,8 +149,14 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+  mode: PropTypes.string.isRequired,
   logIn: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  mode: PropTypes.string.isRequired
+  errors: PropTypes.object.isRequired
 };
-export default connect(null, { logIn })(Login);
+
+const mapStateToProps = (state) => ({
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { logIn })(Login);

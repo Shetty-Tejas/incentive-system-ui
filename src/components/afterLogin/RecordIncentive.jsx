@@ -1,3 +1,5 @@
+/* eslint-disable no-invalid-this */
+/* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
 
 class RecordIncentive extends Component {
@@ -5,19 +7,21 @@ class RecordIncentive extends Component {
     super(props);
     this.state = {};
   }
-  handleChange = (event) =>
-    this.setState({ [event.target.name]: event.target.value }, () =>
-      console.log(this.state.date)
-    );
+
+  handleChange = (event) => this.setState({ [event.target.name]: event.target.value });
+
   todaysDate = () => {
+    const monthCorrector = 1;
+    const addZeroIf = 10;
     const date = new Date();
     const year = date.getFullYear();
-    const tempMonth = date.getMonth() + 1;
+    const tempMonth = date.getMonth() + monthCorrector;
     const tempDay = date.getDate();
-    const month = tempMonth < 10 ? "0" + tempMonth : tempMonth;
-    const day = tempDay < 10 ? "0" + tempDay : tempDay;
-    return year + "-" + month + "-" + day;
+    const month = tempMonth < addZeroIf ? `0${tempMonth}` : tempMonth;
+    const day = tempDay < addZeroIf ? `0${tempDay}` : tempDay;
+    return `${year}-${month}-${day}`;
   };
+
   render() {
     return (
       <div className="container-fluid">
