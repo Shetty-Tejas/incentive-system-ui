@@ -3,11 +3,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import classnames from "classnames";
+import cars from "../cars.jpg";
 
 class Register extends Component {
   constructor(props) {
     super(props);
-    this.state = { mode: "" };
+    this.state = {
+      mode: "",
+      errors: { error: "" }
+   };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -33,13 +38,17 @@ class Register extends Component {
       return (
         <tr>
           <td className="align-bottom">
-            <label htmlFor="contact">
-              <h4 className="font-weight-light">{this.state.mode} Contact:</h4>
+            <label htmlFor="contact" style={{backgroundColor: "white"}}>
+              <h4 className="font-weight-light">{this.state.mode} Contact:
+              <span className="required">*</span>:
+              </h4>
             </label>
           </td>
           <td>
             <input
-              className="form-control input-sm"
+              className={classnames("form-control input-sm", {
+                "is-invalid": this.state.errors.error
+              })}
               type="number"
               id="contact"
               name="contact"
@@ -53,13 +62,15 @@ class Register extends Component {
       return (
         <tr>
           <td className="align-bottom">
-            <label htmlFor="email">
+            <label htmlFor="email" style={{backgroundColor: "white"}}>
               <h4 className="font-weight-light">{this.state.mode} Email:</h4>
             </label>
           </td>
           <td>
             <input
-              className="form-control input-sm"
+              className={classnames("form-control input-sm", {
+                "is-invalid": this.state.errors.error
+              })}
               type="email"
               id="email"
               name="email"
@@ -74,13 +85,31 @@ class Register extends Component {
   };
 
   render() {
+    const style = {
+      color: "white",
+      backgroundColor: "white",
+      padding: "10px",
+      fontFamily: "Serif",
+      backgroundImage: `url(${cars})`,
+      height: "100vh",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      overflow: "hidden"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center" style={
+            {
+              color: "Black" 
+            }}>
             <h1 className="font-weight-light">Welcome {this.state.mode}!</h1>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center" style={
+            {
+              color: "Black" 
+            }}>
             <h5 className="font-weight-light">Please register to continue!</h5>
           </div>
           <div className="row justify-content-center">
@@ -89,17 +118,19 @@ class Register extends Component {
                 <table className="table table-borderless">
                   <tbody>
                     <tr>
-                      <td className="align-bottom">
-                        <label htmlFor="name">
+                    <td className="align-bottom">
+                        <label htmlFor="name" style={{backgroundColor: "white"}}>
                           <h4 className="font-weight-light">
-                            {this.state.mode} Name
+                            {this.state.mode} Name:
                             <span className="required">*</span>:
                           </h4>
                         </label>
                       </td>
                       <td>
                         <input
-                          className="form-control input-sm"
+                          className={classnames("form-control input-sm", {
+                            "is-invalid": this.state.errors.error
+                          })}
                           type="text"
                           id="name"
                           name="name"
@@ -112,13 +143,17 @@ class Register extends Component {
                     {this.inputGenerator()}
                     <tr>
                       <td className="align-bottom">
-                        <label htmlFor="pass">
-                          <h4 className="font-weight-light">Password:</h4>
+                        <label htmlFor="pass" style={{backgroundColor: "white"}}>
+                          <h4 className="font-weight-light">Password:
+                          <span className="required">*</span>:
+                          </h4>
                         </label>
                       </td>
                       <td>
                         <input
-                          className="form-control input-sm"
+                          className={classnames("form-control input-sm", {
+                            "is-invalid": this.state.errors.error
+                          })}
                           type="password"
                           id="pass"
                           name="pass"
@@ -142,10 +177,11 @@ class Register extends Component {
             </div>
           </div>
           <div className="row justify-content-center">
+          <span style={{backgroundColor: "rgb(0,0,0,0.5)"}}>
             <h6 className="font-weight-light">
               Already have an account?&nbsp;
               <Link to={this.regRouter}>Please login.</Link>
-            </h6>
+            </h6></span>
           </div>
         </div>
       </div>

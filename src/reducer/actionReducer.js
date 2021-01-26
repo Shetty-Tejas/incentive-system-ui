@@ -7,7 +7,8 @@ import {
   FETCH_REJECTED_DEALS,
   CREATE_DEAL,
   REDEFINE_DEAL,
-  DELETE_DEAL
+  DELETE_DEAL,
+  RECORD_INCENTIVE
 } from "../actions/types";
 
 const initialState = {};
@@ -35,6 +36,8 @@ const actionReducer = (state = initialState, action) => {
     case REDEFINE_DEAL:
       return { ...state };
     case DELETE_DEAL:
+      return { ...state };
+    case RECORD_INCENTIVE:
       return { ...state };
     default:
       return { ...state };

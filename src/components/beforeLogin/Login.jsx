@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys */
 /* eslint-disable no-alert */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-invalid-this */
@@ -8,6 +9,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/actions";
 import classnames from "classnames";
+import cars from "../cars.jpg";
 
 class Login extends Component {
   constructor(props) {
@@ -60,12 +62,34 @@ class Login extends Component {
   };
 
   render() {
+    const style = {
+      height: "100vh",
+      color: "white",
+      backgroundColor: "white",
+      padding: "10px",
+      fontFamily: "Serif",
+      backgroundImage: `url(${cars})`,
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      overflow: "hidden"
+    };
     return (
-      <div className="container-fluid">
-        <div className="row justify-content-center">
+      <div className="container-fluid" style={style}>
+        <div
+          className="row justify-content-center"
+          style={{
+            color: "Black"
+          }}
+        >
           <h1 className="font-weight-light">Welcome {this.state.mode}!</h1>
         </div>
-        <div className="row justify-content-center">
+        <div
+          className="row justify-content-center"
+          style={{
+            color: "Black"
+          }}
+        >
           <h5 className="font-weight-light">Please log-in to continue!</h5>
         </div>
         <div className="row justify-content-center">
@@ -138,10 +162,12 @@ class Login extends Component {
           <h4 className="font-weight-light">{this.state.errors.error}</h4>
         </div>
         <div className="row justify-content-center">
-          <h6 className="font-weight-light">
-            Don&apos;t have an account?&nbsp;
-            <Link to={this.regRouter}>Please register.</Link>
-          </h6>
+          <span style={{ backgroundColor: "rgb(0,0,0,0.5)" }}>
+            <h6 className="font-weight-light">
+              Don&apos;t have an account?&nbsp;
+              <Link to={this.regRouter}>Please register. </Link>
+            </h6>
+          </span>
         </div>
       </div>
     );

@@ -11,7 +11,8 @@ import {
   FETCH_APPROVED_DEALS,
   CREATE_DEAL,
   DELETE_DEAL,
-  REDEFINE_DEAL
+  REDEFINE_DEAL,
+  RECORD_INCENTIVE
 } from "./types";
 
 const BASE_URL = "http://localhost:8080";
@@ -110,4 +111,17 @@ export const deleteDeal = (object, callback) => async (dispatch) => {
     })
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
   return callback();
+};
+
+export const recordIncentive = (object, history) => async (dispatch) => {
+  const { id, number, name, date, model } = object;
+  const recordInc = `${BASE_URL}/dealer/logged/recordIncentive?dId=${id}&contactNo=${number}&custName=${name}&date=${date}&model=${model}`;
+  await axios
+    .post(recordInc)
+    .then(() => {
+      dispatch({ type: CLEAN_ERRORS });
+      history.push("/dealer/fetchIncentiveRecords");
+      return dispatch({ type: RECORD_INCENTIVE });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };

@@ -90,12 +90,12 @@ class CreateRedefineDeal extends Component {
 
   selectRenderer = () => {
     if (
-      (this.props.states.cars === undefined ||
-        this.props.states.cars === null ||
-        this.props.states.cars === []) &&
-      (this.props.states.deals === undefined ||
-        this.props.states.deals === null ||
-        this.props.states.deals === [])
+      this.props.states.cars === undefined ||
+      this.props.states.cars === null ||
+      this.props.states.cars === [] ||
+      this.props.states.deals === undefined ||
+      this.props.states.deals === null ||
+      this.props.states.deals === []
     ) {
       return (
         <option value="">No {this.chooser("Cars", "Deals")} Available</option>
@@ -201,7 +201,7 @@ class CreateRedefineDeal extends Component {
                         style={{ width: "30vw" }}
                         className="form-control"
                         onChange={this.selectChange}
-                      >
+                      ><option disabled selected>Choose...</option>
                         {this.selectRenderer()}
                       </select>
                     </td>
@@ -235,13 +235,6 @@ class CreateRedefineDeal extends Component {
                         <h4 className="font-weight-light">
                           Rs. {this.state.msp}
                         </h4>
-                      </label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-bottom">
-                      <label htmlFor="">
-                        <h4 className="font-weight-light"></h4>
                       </label>
                     </td>
                   </tr>

@@ -34,7 +34,7 @@ class Dealer extends Component {
         </Route>
         <Route exact path="/dealer/recordIncentive">
           <DealerHeader />
-          <RecordIncentive />
+          <RecordIncentive history={this.history} />
         </Route>
         <Route exact path="/dealer/fetchCustomer">
           <DealerHeader />

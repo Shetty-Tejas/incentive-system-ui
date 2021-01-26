@@ -35,7 +35,7 @@ export default function CustomerHeader() {
               className="nav-link"
               to="/manufacturerSignIn"
             >
-              Manufacturere Sign-In
+              Manufacturer Sign-In
             </NavLink>
           </li>
         </ul>
