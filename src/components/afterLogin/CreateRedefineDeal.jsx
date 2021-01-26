@@ -28,12 +28,10 @@ class CreateRedefineDeal extends Component {
       msp: 0,
       model: "",
       mode: "",
-      loggedId: 0,
       incRange: { min: 2, max: 10 },
       incPriceMin: 0,
       incPriceMax: 0,
       fetched: false,
-      errors: { error: "" },
       basePrice: 0
     };
     this.history = this.props.history;
@@ -48,14 +46,8 @@ class CreateRedefineDeal extends Component {
 
     if (props.states.loggedId !== undefined && !state.fetched) {
       props.fetchCars(props.states.loggedId, props.states.loggedInMode);
-      props.fetchDeals(props.states.loggedId, "dealer");
+      props.fetchDeals(props.states.loggedId, props.states.loggedInMode);
       return { fetched: true };
-    }
-
-    if (props.states.loggedId !== state.loggedId) {
-      return {
-        loggedId: props.states.loggedId
-      };
     }
 
     if (props.errors !== state.errors) {
@@ -72,7 +64,8 @@ class CreateRedefineDeal extends Component {
     } else if (this.state.mode === "redefine") {
       return exp2;
     }
-    return "/";
+    this.history("/dealer/");
+    return null;
   };
 
   incCalcCallBack = () => {
@@ -92,11 +85,7 @@ class CreateRedefineDeal extends Component {
   selectRenderer = () => {
     if (
       this.props.states.cars === undefined ||
-      this.props.states.cars === null ||
-      this.props.states.cars === [] ||
-      this.props.states.deals === undefined ||
-      this.props.states.deals === null ||
-      this.props.states.deals === []
+      this.props.states.deals === undefined
     ) {
       return (
         <option value="">No {this.chooser("Cars", "Deals")} Available</option>
@@ -137,15 +126,15 @@ class CreateRedefineDeal extends Component {
     const { model } = this.state;
     const { min, max } = this.state.incRange;
     const incRange = `${min}-${max}`;
-    const create = { model, incRange, id };
+    const object = { model, incRange, id };
     const zeroValid = 0;
-    const oneValid = 1;
     const incRangePattern = /^[1]?[0-9]?[0-9]-[1]?[0-9]?[0-9]$/;
+    const modelPattern = /^[a-zA-Z0-9]+$/;
     if (id <= zeroValid || id === undefined) {
       alert("You are not logged in. Please log in first");
       this.props.history.push("/");
     } else {
-      if (model.trim().length < oneValid) {
+      if (!modelPattern.test(model)) {
         result = "Please select a valid car model.";
       }
       if (!incRangePattern.test(incRange)) {
@@ -153,13 +142,13 @@ class CreateRedefineDeal extends Component {
       }
       if (
         id > zeroValid &&
-        model.trim().length > oneValid &&
+        modelPattern.test(model) &&
         incRangePattern.test(incRange)
       ) {
         if (this.state.mode === "create") {
-          this.props.createDeal(create, this.history);
+          this.props.createDeal(object, this.history);
         } else if (this.state.mode === "redefine") {
-          this.props.redefineDeal(create, this.history);
+          this.props.redefineDeal(object, this.history);
         }
       } else {
         alert(result);

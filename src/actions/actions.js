@@ -15,7 +15,10 @@ import {
   RECORD_INCENTIVE,
   FETCH_INCENTIVE,
   INSERT_CAR,
-  ALTER_STATUS
+  ALTER_STATUS,
+  FETCH_PROFILE,
+  FETCH_CUSTOMERS,
+  LOGOUT
 } from "./types";
 
 const BASE_URL = "http://localhost:8080";
@@ -165,4 +168,34 @@ export const insertCar = (object, history) => async (dispatch) => {
       return dispatch({ type: INSERT_CAR });
     })
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+export const fetchProfile = (object, mode) => async (dispatch) => {
+  const id = object;
+  const dFetch = `${BASE_URL}/dealer/logged/getProfile?dId=${id}`;
+  const mFetch = `${BASE_URL}/manufacturer/logged/getProfile?mId=${id}`;
+  await axios
+    .get(mode === "dealer" ? dFetch : mFetch)
+    .then((res) => {
+      dispatch({ type: CLEAN_ERRORS });
+      return dispatch({ type: FETCH_PROFILE, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+export const fetchCustomer = (object) => async (dispatch) => {
+  const id = object;
+  const fetch = `${BASE_URL}/dealer/logged/fetchCustomerById?dId=${id}`;
+  await axios
+    .get(fetch)
+    .then((res) => {
+      dispatch({ type: CLEAN_ERRORS });
+      return dispatch({ type: FETCH_CUSTOMERS, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+export const logOut = (history) => (dispatch) => {
+  dispatch({ type: LOGOUT });
+  history.push("/");
 };

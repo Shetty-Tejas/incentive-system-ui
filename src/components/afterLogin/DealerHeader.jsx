@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 export default function DealerHeader() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/dealer/">
+      <NavLink className="navbar-brand" to="/dealer/">
         Incentive System for Car Dealers
-      </a>
+      </NavLink>
       <button
         className="navbar-toggler"
         type="button"
@@ -73,6 +73,15 @@ export default function DealerHeader() {
               to="/dealer/fetchIncentiveRecords"
             >
               Fetch Incentive Records
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              activeClassName="active"
+              className="nav-link"
+              to="/dealer/logout"
+            >
+              Log-Out
             </NavLink>
           </li>
         </ul>

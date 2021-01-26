@@ -13,28 +13,9 @@ class FetchAllDeal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: props.mode,
       deals: []
     };
     props.fetchDeals(props.states.loggedId, this.state.mode);
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.states.deals !== state.deals) {
-      return { deals: props.states.deals };
-    }
-    if (props.states.loggedId !== state.loggedId) {
-      return {
-        loggedId: props.states.loggedId
-      };
-    }
-
-    if (props.errors !== state.errors) {
-      return {
-        errors: props.errors
-      };
-    }
-    return null;
   }
 
   incCalc = (msp, incRange) => {
@@ -51,7 +32,7 @@ class FetchAllDeal extends Component {
     const oId = id;
     const oModel = model;
     const object = { oModel, oId };
-    if (this.state.loggedId === undefined) {
+    if (oId === undefined) {
       alert("Please log in before continuing!");
       this.props.history.push("/");
     } else {
@@ -60,7 +41,7 @@ class FetchAllDeal extends Component {
   };
 
   renderTable = () => {
-    if (this.state.mode === "dealer") {
+    if (this.props.states.deals !== undefined) {
       let count = 0;
       return (
         <table className="table">
@@ -77,7 +58,7 @@ class FetchAllDeal extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.deals.map((element) => (
+            {this.props.states.deals.map((element) => (
               <tr key={element.dealModel}>
                 <td>{++count}</td>
                 <td>{element.dealModel}</td>
@@ -92,7 +73,10 @@ class FetchAllDeal extends Component {
                     value="Delete"
                     className="btn btn-danger"
                     onClick={() => {
-                      this.handleDelete(this.state.loggedId, element.dealModel);
+                      this.handleDelete(
+                        this.props.states.loggedId,
+                        element.dealModel
+                      );
                     }}
                   />
                 </td>
@@ -101,8 +85,6 @@ class FetchAllDeal extends Component {
           </tbody>
         </table>
       );
-    } else if (this.state.mode === "manufacturer") {
-      return null;
     }
     return null;
   };
@@ -126,7 +108,6 @@ class FetchAllDeal extends Component {
 
 FetchAllDeal.propTypes = {
   states: PropTypes.object.isRequired,
-  mode: PropTypes.string.isRequired,
   history: PropTypes.object.isRequired,
   fetchDeals: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,

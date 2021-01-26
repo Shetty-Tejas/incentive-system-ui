@@ -14,3 +14,6 @@ export const RECORD_INCENTIVE = "RECORD_INCENTIVE";
 export const FETCH_INCENTIVE = "FETCH_INCENTIVE";
 export const INSERT_CAR = "INSERT_CAR";
 export const ALTER_STATUS = "ALTER_STATUS";
+export const FETCH_PROFILE = "FETCH_PROFILE";
+export const LOGOUT = "LOGOUT";
+export const FETCH_CUSTOMERS = "FETCH_CUSTOMERS";

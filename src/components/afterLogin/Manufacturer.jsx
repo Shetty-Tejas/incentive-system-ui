@@ -6,6 +6,7 @@ import AlterStatus from "./AlterStatus";
 import FetchAllCars from "./FetchAllCars";
 import ProfilePage from "./ProfilePage";
 import ManufacturerHeader from "./ManufacturerHeader";
+import LogOut from "./LogOut";
 
 class Manufacturer extends Component {
   constructor(props) {
@@ -32,6 +33,10 @@ class Manufacturer extends Component {
         <Route exact path="/manufacturer/fetchAllCars">
           <ManufacturerHeader />
           <FetchAllCars />
+        </Route>
+        <Route exact path="/manufacturer/logout">
+          <ManufacturerHeader />
+          <LogOut history={this.history} />
         </Route>
       </Switch>
     );

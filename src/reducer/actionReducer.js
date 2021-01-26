@@ -11,7 +11,10 @@ import {
   RECORD_INCENTIVE,
   FETCH_INCENTIVE,
   INSERT_CAR,
-  ALTER_STATUS
+  ALTER_STATUS,
+  FETCH_PROFILE,
+  FETCH_CUSTOMERS,
+  LOGOUT
 } from "../actions/types";
 
 const initialState = {};
@@ -48,6 +51,12 @@ const actionReducer = (state = initialState, action) => {
       return { ...state };
     case ALTER_STATUS:
       return { ...state };
+    case FETCH_PROFILE:
+      return { ...state, userObj: action.payload };
+    case FETCH_CUSTOMERS:
+      return { ...state, customers: action.payload };
+    case LOGOUT:
+      return {};
     default:
       return { ...state };
   }

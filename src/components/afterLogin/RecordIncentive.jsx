@@ -45,14 +45,13 @@ class RecordIncentive extends Component {
   };
 
   handleSubmit = () => {
-    const one = 1;
     const id = this.props.states.loggedId;
     const numberPattern = /^[987][0-9]{9}$/;
     const namePattern = /^[a-zA-Z ]{3,34}$/;
     const modelPattern = /^[a-zA-Z0-9]+$/;
     const { name, model, date } = this.state;
     const number = parseInt(this.state.number, 10);
-    if (id < one) {
+    if (id === undefined) {
       alert("Please log in to continue!");
       this.history.push("/");
     } else {

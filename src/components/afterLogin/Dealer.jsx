@@ -3,10 +3,12 @@ import { Switch, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import CreateRedefineDeal from "./CreateRedefineDeal";
 import DealerHeader from "./DealerHeader";
+import ProfilePage from "./ProfilePage";
 import FetchAllDeal from "./FetchAllDeal";
 import FetchCustomer from "./FetchCustomer";
 import RecordIncentive from "./RecordIncentive";
 import FetchIncentiveRecords from "./FetchIncentiveRecords";
+import LogOut from "./LogOut";
 
 class Dealer extends Component {
   constructor(props) {
@@ -18,6 +20,10 @@ class Dealer extends Component {
   render() {
     return (
       <Switch>
+        <Route exact path="/dealer/">
+          <DealerHeader />
+          <ProfilePage history={this.history} />
+        </Route>
         <Route exact path="/dealer/createDeals">
           <DealerHeader />
           <CreateRedefineDeal mode={this.state.create} history={this.history} />
@@ -31,7 +37,7 @@ class Dealer extends Component {
         </Route>
         <Route exact path="/dealer/fetchAllDeals">
           <DealerHeader />
-          <FetchAllDeal mode={this.state.dealer} history={this.history} />
+          <FetchAllDeal history={this.history} />
         </Route>
         <Route exact path="/dealer/recordIncentive">
           <DealerHeader />
@@ -44,6 +50,10 @@ class Dealer extends Component {
         <Route exact path="/dealer/fetchIncentiveRecords">
           <DealerHeader />
           <FetchIncentiveRecords />
+        </Route>
+        <Route exact path="/dealer/logout">
+          <DealerHeader />
+          <LogOut history={this.history} />
         </Route>
       </Switch>
     );
