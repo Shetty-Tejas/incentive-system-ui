@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import InsertCar from "./InsertCar";
 import AlterStatus from "./AlterStatus";
 import FetchAllCars from "./FetchAllCars";
+import ProfilePage from "./ProfilePage";
 import ManufacturerHeader from "./ManufacturerHeader";
 
 class Manufacturer extends Component {
@@ -16,6 +17,10 @@ class Manufacturer extends Component {
   render() {
     return (
       <Switch>
+        <Route exact path="/manufacturer/">
+          <ManufacturerHeader />
+          <ProfilePage history={this.history} />
+        </Route>
         <Route exact path="/manufacturer/insertCar">
           <ManufacturerHeader />
           <InsertCar history={this.history} />

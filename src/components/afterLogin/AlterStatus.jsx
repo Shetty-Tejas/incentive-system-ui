@@ -104,7 +104,6 @@ class AlterStatus extends Component {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <h1 className="font-weight-light">Update Deal Status!</h1>
-          <br />
         </div>
         <div className="row justify-content-center">
           <h5 className="font-weight-light">

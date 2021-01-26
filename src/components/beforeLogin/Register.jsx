@@ -12,7 +12,7 @@ class Register extends Component {
     this.state = {
       mode: "",
       errors: { error: "" }
-   };
+    };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -38,9 +38,10 @@ class Register extends Component {
       return (
         <tr>
           <td className="align-bottom">
-            <label htmlFor="contact" style={{backgroundColor: "white"}}>
-              <h4 className="font-weight-light">{this.state.mode} Contact:
-              <span className="required">*</span>:
+            <label htmlFor="contact" style={{ backgroundColor: "white" }}>
+              <h4 className="font-weight-light">
+                {this.state.mode} Contact:
+                <span className="required">*</span>:
               </h4>
             </label>
           </td>
@@ -62,7 +63,7 @@ class Register extends Component {
       return (
         <tr>
           <td className="align-bottom">
-            <label htmlFor="email" style={{backgroundColor: "white"}}>
+            <label htmlFor="email" style={{ backgroundColor: "white" }}>
               <h4 className="font-weight-light">{this.state.mode} Email:</h4>
             </label>
           </td>
@@ -86,30 +87,34 @@ class Register extends Component {
 
   render() {
     const style = {
-      color: "white",
-      backgroundColor: "white",
       padding: "10px",
-      fontFamily: "Serif",
-      backgroundImage: `url(${cars})`,
+      overflow: "hidden",
       height: "100vh",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
+      fontFamily: "Serif",
+      color: "white",
       backgroundSize: "cover",
-      overflow: "hidden"
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white"
     };
     return (
       <div className="container-fluid" style={style}>
         <div>
-          <div className="row justify-content-center" style={
-            {
-              color: "Black" 
-            }}>
+          <div
+            className="row justify-content-center"
+            style={{
+              color: "Black"
+            }}
+          >
             <h1 className="font-weight-light">Welcome {this.state.mode}!</h1>
           </div>
-          <div className="row justify-content-center" style={
-            {
-              color: "Black" 
-            }}>
+          <div
+            className="row justify-content-center"
+            style={{
+              color: "Black"
+            }}
+          >
             <h5 className="font-weight-light">Please register to continue!</h5>
           </div>
           <div className="row justify-content-center">
@@ -118,8 +123,11 @@ class Register extends Component {
                 <table className="table table-borderless">
                   <tbody>
                     <tr>
-                    <td className="align-bottom">
-                        <label htmlFor="name" style={{backgroundColor: "white"}}>
+                      <td className="align-bottom">
+                        <label
+                          htmlFor="name"
+                          style={{ backgroundColor: "white" }}
+                        >
                           <h4 className="font-weight-light">
                             {this.state.mode} Name:
                             <span className="required">*</span>:
@@ -143,9 +151,13 @@ class Register extends Component {
                     {this.inputGenerator()}
                     <tr>
                       <td className="align-bottom">
-                        <label htmlFor="pass" style={{backgroundColor: "white"}}>
-                          <h4 className="font-weight-light">Password:
-                          <span className="required">*</span>:
+                        <label
+                          htmlFor="pass"
+                          style={{ backgroundColor: "white" }}
+                        >
+                          <h4 className="font-weight-light">
+                            Password:
+                            <span className="required">*</span>:
                           </h4>
                         </label>
                       </td>
@@ -177,11 +189,12 @@ class Register extends Component {
             </div>
           </div>
           <div className="row justify-content-center">
-          <span style={{backgroundColor: "rgb(0,0,0,0.5)"}}>
-            <h6 className="font-weight-light">
-              Already have an account?&nbsp;
-              <Link to={this.regRouter}>Please login.</Link>
-            </h6></span>
+            <span style={{ backgroundColor: "rgb(0,0,0,0.5)" }}>
+              <h6 className="font-weight-light">
+                Already have an account?&nbsp;
+                <Link to={this.regRouter}>Please login.</Link>
+              </h6>
+            </span>
           </div>
         </div>
       </div>

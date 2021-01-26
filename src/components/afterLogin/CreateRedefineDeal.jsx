@@ -19,6 +19,7 @@ import {
   createDeal,
   redefineDeal
 } from "../../actions/actions";
+import carPic from "../cars.jpg";
 
 class CreateRedefineDeal extends Component {
   constructor(props) {
@@ -167,8 +168,20 @@ class CreateRedefineDeal extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      height: "100vh",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${carPic})`,
+      backgroundColor: "white"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">
             {this.chooser("Create Deal!", "Redefine Deal!")}
@@ -185,7 +198,13 @@ class CreateRedefineDeal extends Component {
         <div className="row justify-content-center">
           <div className="col-9 table-responsive">
             <form>
-              <table className="table table-borderless">
+              <table
+                className="table table-borderless"
+                style={{
+                  color: "rgb(255,255,255,1)",
+                  backgroundColor: "rgb(0,0,0,0.37)"
+                }}
+              >
                 <tbody>
                   <tr>
                     <td className="align-bottom">
@@ -201,7 +220,10 @@ class CreateRedefineDeal extends Component {
                         style={{ width: "30vw" }}
                         className="form-control"
                         onChange={this.selectChange}
-                      ><option disabled selected>Choose...</option>
+                      >
+                        <option disabled selected>
+                          Choose...
+                        </option>
                         {this.selectRenderer()}
                       </select>
                     </td>
