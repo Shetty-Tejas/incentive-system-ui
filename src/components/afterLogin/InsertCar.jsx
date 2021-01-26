@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { insertCar } from "../../actions/actions";
+import cars from "../cars.jpg";
 
 class InsertCar extends Component {
   constructor(props) {
@@ -50,8 +51,21 @@ class InsertCar extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      height: "100vh",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">Insert Car!</h1>
         </div>
@@ -61,12 +75,18 @@ class InsertCar extends Component {
         <div className="row justify-content-center">
           <div className="col-9 table-responsive">
             <form>
-              <table className="table table-borderless">
+              <table
+                className="table table-borderless"
+                style={{ backgroundColor: "rgb(0,0,0,0.5)" }}
+              >
                 <tbody>
                   <tr>
                     <td className="align-bottom">
                       <label htmlFor="carModel">
-                        <h4 className="font-weight-light">
+                        <h4
+                          className="font-weight-light"
+                          style={{ color: "white" }}
+                        >
                           Enter Car Model<span className="required">*</span>:
                         </h4>
                       </label>
@@ -85,7 +105,10 @@ class InsertCar extends Component {
                   <tr>
                     <td className="align-bottom">
                       <label htmlFor="carBasePrice">
-                        <h4 className="font-weight-light">
+                        <h4
+                          className="font-weight-light"
+                          style={{ color: "white" }}
+                        >
                           Enter BasePrice<span className="required">*</span>:
                         </h4>
                       </label>
@@ -104,7 +127,10 @@ class InsertCar extends Component {
                   <tr>
                     <td className="align-bottom">
                       <label htmlFor="carMsp">
-                        <h4 className="font-weight-light">
+                        <h4
+                          className="font-weight-light"
+                          style={{ color: "white" }}
+                        >
                           Enter Max Selling Price
                           <span className="required">*</span>:
                         </h4>

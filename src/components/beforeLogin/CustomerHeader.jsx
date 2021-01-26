@@ -1,12 +1,13 @@
+/* eslint-disable max-lines-per-function */
 import React from "react";
 import { NavLink } from "react-router-dom";
 
 export default function CustomerHeader() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/">
+      <NavLink className="navbar-brand" to="/">
         Incentive System for Car Dealers
-      </a>
+      </NavLink>
       <button
         className="navbar-toggler"
         type="button"

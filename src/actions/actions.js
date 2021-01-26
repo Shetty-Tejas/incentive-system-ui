@@ -1,3 +1,5 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 /* eslint-disable implicit-arrow-linebreak */
 import axios from "axios";
@@ -18,6 +20,7 @@ import {
   ALTER_STATUS,
   FETCH_PROFILE,
   FETCH_CUSTOMERS,
+  REGISTER,
   LOGOUT
 } from "./types";
 
@@ -38,6 +41,28 @@ export const logIn = (object, mode, history) => async (dispatch) => {
         type: mode === "Dealer" ? LOG_IN_DEALER : LOG_IN_MANUFACTURER,
         payload: res.data
       });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+export const register = (object, mode, history) => async (dispatch) => {
+  const { name, contact, pass } = object;
+  const dRegister = `${BASE_URL}/dealer/register?dName=${name}&dContact=${contact}&dPass=${pass}`;
+  const mRegister = `${BASE_URL}/manufacturer/register?mName=${name}i&mEmail=${contact}&mPass=${pass}`;
+  const dRedirect = "/dealerSignIn";
+  const mRedirect = "/manufacturerSignIn";
+  await axios
+    .post(mode === "Dealer" ? dRegister : mRegister)
+    .then((res) => {
+      history.push(mode === "Dealer" ? dRedirect : mRedirect);
+      dispatch({ type: CLEAN_ERRORS });
+      alert(
+        `Your User-Id is ${
+          mode === "Dealer" ? res.data.dealerId : res.data.manufacturerId
+        }! Please use this id at the sign-in page!`
+      );
+      history.push(mode === "Dealer" ? dRedirect : mRedirect);
+      dispatch({ type: REGISTER });
     })
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };

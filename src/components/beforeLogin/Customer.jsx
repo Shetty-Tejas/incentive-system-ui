@@ -4,6 +4,7 @@ import CustomerHeader from "./CustomerHeader";
 import Login from "./Login";
 import Register from "./Register";
 import PropTypes from "prop-types";
+import Welcome from "./Welcome";
 
 class Customer extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Customer extends Component {
       <Switch>
         <Route exact path="/">
           <CustomerHeader />
+          <Welcome />
         </Route>
         <Route exact path="/dealerSignIn">
           <CustomerHeader />

@@ -1,6 +1,7 @@
 export const GET_ERRORS = "GET_ERRORS";
 export const CLEAN_ERRORS = "CLEAN_ERRORS";
 
+export const REGISTER = "REGISTER";
 export const LOG_IN_DEALER = "LOG_IN_DEALER";
 export const LOG_IN_MANUFACTURER = "LOG_IN_MANUFACTURER";
 export const FETCH_CARS = "FETCH_CARS";

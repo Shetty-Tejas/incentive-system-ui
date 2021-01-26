@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchDeals, alterDeal } from "../../actions/actions";
+import cars from "../cars.jpg";
 
 class AlterStatus extends Component {
   constructor(props) {
@@ -100,8 +101,21 @@ class AlterStatus extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      height: "100vh",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">Update Deal Status!</h1>
         </div>
@@ -109,8 +123,11 @@ class AlterStatus extends Component {
           <h5 className="font-weight-light">
             Approve or reject the deals here!
           </h5>
-          <div className="table-responsive">
-            <table className="table">
+          <div
+            className="table-responsive"
+            style={{ backgroundColor: "rgb(0,0,0,0.5)" }}
+          >
+            <table className="table" style={{ color: "white" }}>
               <thead>
                 <tr>
                   <th>Sr No.</th>

@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchCustomer } from "../../actions/actions";
+import cars from "../cars.jpg";
 
 class FetchCustomer extends Component {
   constructor(props) {
@@ -48,8 +49,20 @@ class FetchCustomer extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">All Customer Records!</h1>
         </div>
@@ -59,7 +72,13 @@ class FetchCustomer extends Component {
           </h5>
         </div>
         <div className="table-responsive">
-          <table className="table">
+          <table
+            className="table"
+            style={{
+              color: "rgb(255,255,255,1)",
+              backgroundColor: "rgb(0,0,0,0.65)"
+            }}
+          >
             <thead>
               <tr>
                 <th>Customer Id</th>

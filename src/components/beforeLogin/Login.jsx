@@ -63,16 +63,17 @@ class Login extends Component {
 
   render() {
     const style = {
-      height: "100vh",
-      color: "white",
-      backgroundColor: "white",
       padding: "10px",
+      overflow: "hidden",
+      height: "100vh",
       fontFamily: "Serif",
-      backgroundImage: `url(${cars})`,
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
+      color: "black",
       backgroundSize: "cover",
-      overflow: "hidden"
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
     };
     return (
       <div className="container-fluid" style={style}>

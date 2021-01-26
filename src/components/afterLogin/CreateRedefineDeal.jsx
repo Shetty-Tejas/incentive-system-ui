@@ -167,7 +167,8 @@ class CreateRedefineDeal extends Component {
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       backgroundImage: `url(${carPic})`,
-      backgroundColor: "white"
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
     };
     return (
       <div className="container-fluid" style={style}>
@@ -191,7 +192,7 @@ class CreateRedefineDeal extends Component {
                 className="table table-borderless"
                 style={{
                   color: "rgb(255,255,255,1)",
-                  backgroundColor: "rgb(0,0,0,0.37)"
+                  backgroundColor: "rgb(0,0,0,0.5)"
                 }}
               >
                 <tbody>

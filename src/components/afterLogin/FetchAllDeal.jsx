@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchDeals, deleteDeal } from "../../actions/actions";
+import cars from "../cars.jpg";
 
 class FetchAllDeal extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class FetchAllDeal extends Component {
       return (
         <table className="table">
           <thead>
-            <tr>
+            <tr style={{ color: "white" }}>
               <th>Sr. No.</th>
               <th>Car Model</th>
               <th>Car Manufacturer</th>
@@ -57,7 +58,7 @@ class FetchAllDeal extends Component {
               <th>Delete?</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style={{ color: "white", backgroundColor: "SaddleBrown" }}>
             {this.props.states.deals.map((element) => (
               <tr key={element.dealModel}>
                 <td>{++count}</td>
@@ -90,8 +91,21 @@ class FetchAllDeal extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      height: "100vh",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">All Deals!</h1>
         </div>
@@ -100,7 +114,12 @@ class FetchAllDeal extends Component {
             You can find all the created deals here!
           </h5>
         </div>
-        <div className="table-responsive">{this.renderTable()}</div>
+        <div
+          className="table-responsive"
+          style={{ backgroundColor: "rgb(0,0,0,0.65)" }}
+        >
+          {this.renderTable()}
+        </div>
       </div>
     );
   }

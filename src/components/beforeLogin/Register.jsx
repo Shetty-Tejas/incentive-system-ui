@@ -1,18 +1,28 @@
+/* eslint-disable max-statements */
+/* eslint-disable no-alert */
+/* eslint-disable no-useless-backreference */
+/* eslint-disable prefer-named-capture-group */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-invalid-this */
 /* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import classnames from "classnames";
 import cars from "../cars.jpg";
+import { register } from "../../actions/actions";
 
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pass: "",
+      number: "",
       mode: "",
-      errors: { error: "" }
+      contact: ""
     };
+    this.history = this.props.history;
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -33,12 +43,15 @@ class Register extends Component {
     return "/";
   };
 
+  handleChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+
   inputGenerator = () => {
     if (this.state.mode === "Dealer") {
       return (
         <tr>
           <td className="align-bottom">
-            <label htmlFor="contact" style={{ backgroundColor: "white" }}>
+            <label htmlFor="contact">
               <h4 className="font-weight-light">
                 {this.state.mode} Contact:
                 <span className="required">*</span>:
@@ -48,13 +61,13 @@ class Register extends Component {
           <td>
             <input
               className={classnames("form-control input-sm", {
-                "is-invalid": this.state.errors.error
+                "is-invalid": this.props.errors.error
               })}
               type="number"
               id="contact"
               name="contact"
               placeholder="Contact goes here! Ex. 9876543210"
-              required
+              onChange={this.handleChange}
             />
           </td>
         </tr>
@@ -63,20 +76,20 @@ class Register extends Component {
       return (
         <tr>
           <td className="align-bottom">
-            <label htmlFor="email" style={{ backgroundColor: "white" }}>
+            <label htmlFor="contact">
               <h4 className="font-weight-light">{this.state.mode} Email:</h4>
             </label>
           </td>
           <td>
             <input
               className={classnames("form-control input-sm", {
-                "is-invalid": this.state.errors.error
+                "is-invalid": this.props.errors.error
               })}
               type="email"
-              id="email"
-              name="email"
+              id="contact"
+              name="contact"
               placeholder="Email goes here! Ex. manufacturer@company.com"
-              required
+              onChange={this.handleChange}
             />
           </td>
         </tr>
@@ -85,18 +98,44 @@ class Register extends Component {
     return null;
   };
 
+  handleSubmit = () => {
+    const { mode, name, pass } = this.state;
+    const contact =
+      mode === "Dealer" ? parseInt(this.state.contact, 10) : this.state.contact;
+    const namePattern = /^[a-zA-Z ]{3,34}$/;
+    const passPattern = /^[a-zA-Z0-9|_|$|\\.|@]+$/;
+    const contactPattern =
+      mode === "Dealer"
+        ? /^[987][0-9]{9}$/
+        : /^([a-z]+([\\._]\1{2})?)+@[a-z]+[\\.][a-z]{2,5}$/;
+    if (!namePattern.test(name)) {
+      alert("Please insert a valid name. Only english characters.");
+      return null;
+    }
+    if (!passPattern.test(pass)) {
+      alert("Please enter a valid password.");
+      return null;
+    }
+    if (!contactPattern.test(contact)) {
+      alert("Please insert proper contact details.");
+      return null;
+    }
+    return this.props.register({ pass, name, contact }, mode, this.history);
+  };
+
   render() {
     const style = {
       padding: "10px",
       overflow: "hidden",
       height: "100vh",
       fontFamily: "Serif",
-      color: "white",
+      color: "black",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
       backgroundImage: `url(${cars})`,
-      backgroundColor: "white"
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
     };
     return (
       <div className="container-fluid" style={style}>
@@ -124,10 +163,7 @@ class Register extends Component {
                   <tbody>
                     <tr>
                       <td className="align-bottom">
-                        <label
-                          htmlFor="name"
-                          style={{ backgroundColor: "white" }}
-                        >
+                        <label htmlFor="name">
                           <h4 className="font-weight-light">
                             {this.state.mode} Name:
                             <span className="required">*</span>:
@@ -137,13 +173,13 @@ class Register extends Component {
                       <td>
                         <input
                           className={classnames("form-control input-sm", {
-                            "is-invalid": this.state.errors.error
+                            "is-invalid": this.props.errors.error
                           })}
                           type="text"
                           id="name"
                           name="name"
                           placeholder="Name goes here! Ex. John Doe"
-                          required
+                          onChange={this.handleChange}
                           autoFocus
                         />
                       </td>
@@ -151,10 +187,7 @@ class Register extends Component {
                     {this.inputGenerator()}
                     <tr>
                       <td className="align-bottom">
-                        <label
-                          htmlFor="pass"
-                          style={{ backgroundColor: "white" }}
-                        >
+                        <label htmlFor="pass">
                           <h4 className="font-weight-light">
                             Password:
                             <span className="required">*</span>:
@@ -164,13 +197,13 @@ class Register extends Component {
                       <td>
                         <input
                           className={classnames("form-control input-sm", {
-                            "is-invalid": this.state.errors.error
+                            "is-invalid": this.props.errors.error
                           })}
                           type="password"
                           id="pass"
                           name="pass"
                           placeholder="Password goes here! Ex. pass1234"
-                          required
+                          onChange={this.handleChange}
                         />
                       </td>
                     </tr>
@@ -180,6 +213,7 @@ class Register extends Component {
                           type="button"
                           className="btn btn-primary"
                           value="Submit"
+                          onClick={this.handleSubmit}
                         />
                       </td>
                     </tr>
@@ -189,11 +223,20 @@ class Register extends Component {
             </div>
           </div>
           <div className="row justify-content-center">
-            <span style={{ backgroundColor: "rgb(0,0,0,0.5)" }}>
+            <span
+              style={{
+                backgroundColor: "rgb(0,0,0,0.5)"
+              }}
+            >
               <h6 className="font-weight-light">
                 Already have an account?&nbsp;
                 <Link to={this.regRouter}>Please login.</Link>
               </h6>
+            </span>
+          </div>
+          <div className="row justify-content-center">
+            <span style={{ backgroundColor: "rgb(0,0,0,0.5)" }}>
+              <h6 className="font-weight-light">{this.props.errors.error}</h6>
             </span>
           </div>
         </div>
@@ -203,6 +246,16 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  mode: PropTypes.string.isRequired
+  states: PropTypes.object.isRequired,
+  register: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired,
+  history: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
-export default Register;
+
+const mapStateToProps = (state) => ({
+  states: state.states,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { register })(Register);

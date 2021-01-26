@@ -1,4 +1,5 @@
 import {
+  REGISTER,
   LOG_IN_DEALER,
   LOG_IN_MANUFACTURER,
   FETCH_CARS,
@@ -55,6 +56,8 @@ const actionReducer = (state = initialState, action) => {
       return { ...state, userObj: action.payload };
     case FETCH_CUSTOMERS:
       return { ...state, customers: action.payload };
+    case REGISTER:
+      return { ...state };
     case LOGOUT:
       return {};
     default:

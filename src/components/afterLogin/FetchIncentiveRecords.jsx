@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchIncentives } from "../../actions/actions";
+import cars from "../cars.jpg";
 
 class FetchIncentiveRecords extends Component {
   constructor(props) {
@@ -60,8 +61,20 @@ class FetchIncentiveRecords extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">All Incentive Records!</h1>
         </div>
@@ -71,7 +84,7 @@ class FetchIncentiveRecords extends Component {
           </h5>
         </div>
         <div className="table-responsive">
-          <table className="table">
+          <table className="table" style={{ backgroundColor: "Tan" }}>
             <thead>
               <tr>
                 <th>Incentive Id</th>
@@ -84,7 +97,9 @@ class FetchIncentiveRecords extends Component {
                 <th>Incentive Received</th>
               </tr>
             </thead>
-            <tbody>{this.renderTable()}</tbody>
+            <tbody style={{ backgroundColor: "RosyBrown" }}>
+              {this.renderTable()}
+            </tbody>
           </table>
         </div>
       </div>

@@ -11,6 +11,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchApproved, recordIncentive } from "../../actions/actions";
+import cars from "../cars.jpg";
 
 class RecordIncentive extends Component {
   constructor(props) {
@@ -93,8 +94,21 @@ class RecordIncentive extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      height: "100vh",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">Record Incentive!</h1>
         </div>
@@ -103,12 +117,18 @@ class RecordIncentive extends Component {
         </div>
         <div className="row justify-content-center">
           <div className="col-9 table-responsive">
-            <table className="table table-borderless">
+            <table
+              className="table table-borderless"
+              style={{ backgroundColor: "rgb(0,0,0,0.5)" }}
+            >
               <tbody>
                 <tr>
                   <td className="align-bottom">
                     <label htmlFor="name">
-                      <h4 className="font-weight-light">
+                      <h4
+                        className="font-weight-light"
+                        style={{ color: "white" }}
+                      >
                         Customer Name<span className="required">*</span>:
                       </h4>
                     </label>
@@ -128,7 +148,10 @@ class RecordIncentive extends Component {
                 <tr>
                   <td className="align-bottom">
                     <label htmlFor="number">
-                      <h4 className="font-weight-light">
+                      <h4
+                        className="font-weight-light"
+                        style={{ color: "white" }}
+                      >
                         Customer Contact no.<span className="required">*</span>:
                       </h4>
                     </label>
@@ -147,7 +170,10 @@ class RecordIncentive extends Component {
                 <tr>
                   <td className="align-bottom">
                     <label htmlFor="date">
-                      <h4 className="font-weight-light">
+                      <h4
+                        className="font-weight-light"
+                        style={{ color: "white" }}
+                      >
                         Date of purchase<span className="required">*</span>:
                       </h4>
                     </label>
@@ -167,7 +193,10 @@ class RecordIncentive extends Component {
                 <tr>
                   <td className="align-bottom">
                     <label htmlFor="model">
-                      <h4 className="font-weight-light">
+                      <h4
+                        className="font-weight-light"
+                        style={{ color: "white" }}
+                      >
                         Car Model<span className="required">*</span>:
                       </h4>
                     </label>
