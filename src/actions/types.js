@@ -11,3 +11,6 @@ export const CREATE_DEAL = "CREATE_DEAL";
 export const REDEFINE_DEAL = "REDEFINE_DEAL";
 export const DELETE_DEAL = "DELETE_DEAL";
 export const RECORD_INCENTIVE = "RECORD_INCENTIVE";
+export const FETCH_INCENTIVE = "FETCH_INCENTIVE";
+export const INSERT_CAR = "INSERT_CAR";
+export const ALTER_STATUS = "ALTER_STATUS";

@@ -6,6 +6,7 @@ import DealerHeader from "./DealerHeader";
 import FetchAllDeal from "./FetchAllDeal";
 import FetchCustomer from "./FetchCustomer";
 import RecordIncentive from "./RecordIncentive";
+import FetchIncentiveRecords from "./FetchIncentiveRecords";
 
 class Dealer extends Component {
   constructor(props) {
@@ -41,7 +42,8 @@ class Dealer extends Component {
           <FetchCustomer />
         </Route>
         <Route exact path="/dealer/fetchIncentiveRecords">
-          World
+          <DealerHeader />
+          <FetchIncentiveRecords />
         </Route>
       </Switch>
     );

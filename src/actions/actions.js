@@ -12,7 +12,10 @@ import {
   CREATE_DEAL,
   DELETE_DEAL,
   REDEFINE_DEAL,
-  RECORD_INCENTIVE
+  RECORD_INCENTIVE,
+  FETCH_INCENTIVE,
+  INSERT_CAR,
+  ALTER_STATUS
 } from "./types";
 
 const BASE_URL = "http://localhost:8080";
@@ -113,6 +116,19 @@ export const deleteDeal = (object, callback) => async (dispatch) => {
   return callback();
 };
 
+export const alterDeal = (object, callback) => async (dispatch) => {
+  const { id, model, bool } = object;
+  const alterUrl = `${BASE_URL}/manufacturer/logged/alterStatus?mId=${id}&carModel=${model}&flag=${bool}`;
+  await axios
+    .post(alterUrl)
+    .then(() => {
+      dispatch({ type: CLEAN_ERRORS });
+      return dispatch({ type: ALTER_STATUS });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+  return callback();
+};
+
 export const recordIncentive = (object, history) => async (dispatch) => {
   const { id, number, name, date, model } = object;
   const recordInc = `${BASE_URL}/dealer/logged/recordIncentive?dId=${id}&contactNo=${number}&custName=${name}&date=${date}&model=${model}`;
@@ -122,6 +138,31 @@ export const recordIncentive = (object, history) => async (dispatch) => {
       dispatch({ type: CLEAN_ERRORS });
       history.push("/dealer/fetchIncentiveRecords");
       return dispatch({ type: RECORD_INCENTIVE });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+export const fetchIncentives = (object) => async (dispatch) => {
+  const id = object;
+  const fetchInc = `${BASE_URL}/dealer/logged/fetchIncentiveRecords?dId=${id}`;
+  await axios
+    .get(fetchInc)
+    .then((res) => {
+      dispatch({ type: CLEAN_ERRORS });
+      return dispatch({ type: FETCH_INCENTIVE, payload: res.data });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+export const insertCar = (object, history) => async (dispatch) => {
+  const { id, carModel, carBasePrice, carMsp } = object;
+  const insertCarUrl = `${BASE_URL}/manufacturer/logged/insertCar?mId=${id}&carModel=${carModel}&carBasePrice=${carBasePrice}&carMsp=${carMsp}`;
+  await axios
+    .post(insertCarUrl)
+    .then(() => {
+      dispatch({ type: CLEAN_ERRORS });
+      history.push("/manufacturer/fetchAllCars");
+      return dispatch({ type: INSERT_CAR });
     })
     .catch((err) => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };

@@ -1,10 +1,58 @@
+/* eslint-disable max-statements */
+/* eslint-disable no-extra-parens */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-invalid-this */
+/* eslint-disable no-undefined */
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchCars } from "../../actions/actions";
 
 class FetchAllCars extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { cars: [] };
   }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.states.loggedId !== undefined && !state.fetched) {
+      props.fetchCars(props.states.loggedId, props.states.loggedInMode);
+      return { fetched: true };
+    }
+
+    if (props.states.loggedId !== state.loggedId) {
+      return {
+        loggedId: props.states.loggedId
+      };
+    }
+
+    if (props.errors !== state.errors) {
+      return {
+        errors: props.errors
+      };
+    }
+    return null;
+  }
+
+  renderTable = () => {
+    if (
+      this.props.states.cars === undefined ||
+      this.props.states.cars === null ||
+      this.props.states.cars === []
+    ) {
+      return null;
+    }
+    let count = 0;
+    return this.props.states.cars.map((element) => (
+      <tr key={element.carModel}>
+        <td>{++count}</td>
+        <td>{element.carManufacturer}</td>
+        <td>{element.carModel}</td>
+        <td>Rs. {element.carBasePrice}</td>
+        <td>Rs. {element.carMsp}</td>
+      </tr>
+    ));
+  };
 
   render() {
     return (
@@ -13,48 +61,35 @@ class FetchAllCars extends Component {
           <h1 className="font-weight-light">All Available Cars</h1>
           <br />
         </div>
-        <div className="row justify-content-center">
-          <div className="col-6 table-responsive">
-            <form>
-              <table className="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td className="align-bottom">
-                      <label htmlFor="mId">
-                        <h4 className="font-weight-light">
-                          {this.state.mode} Manufacturer ID:
-                        </h4>
-                      </label>
-                    </td>
-                    <td>
-                      <input
-                        className="form-control input-sm"
-                        type="number"
-                        id="mId"
-                        name="mId"
-                        placeholder="Enter Manufacturer ID:"
-                        required
-                        autoFocus
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan="2">
-                      <input
-                        type="button"
-                        className="btn btn-primary"
-                        value="Submit"
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </form>
-          </div>
+        <div className="table-responsive">
+          <form>
+            <table className="table">
+              <thead>
+                <th>Sr no.</th>
+                <th>Car Manufacturer</th>
+                <th>Car Model</th>
+                <th>Base Price</th>
+                <th>Maximum Selling Price</th>
+              </thead>
+              <tbody>{this.renderTable()}</tbody>
+            </table>
+          </form>
         </div>
       </div>
     );
   }
 }
 
-export default FetchAllCars;
+FetchAllCars.propTypes = {
+  states: PropTypes.object.isRequired,
+  mode: PropTypes.string.isRequired,
+  fetchCars: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  states: state.states,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { fetchCars })(FetchAllCars);

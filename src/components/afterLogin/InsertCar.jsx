@@ -1,51 +1,73 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable max-statements */
+/* eslint-disable no-alert */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-invalid-this */
+/* eslint-disable class-methods-use-this */
 /* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { insertCar } from "../../actions/actions";
 
 class InsertCar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { carMsp: 0, carModel: "", carBasePrice: 0 };
+    this.history = this.props.history;
   }
+
+  handleChange = (event) =>
+    this.setState({ [event.target.name]: event.target.value });
+
+  handleSubmit = () => {
+    const zero = 0;
+    const id = this.props.states.loggedId;
+    const modelPattern = /^[a-zA-Z0-9]+$/;
+    if (id > zero) {
+      const carMsp = parseInt(this.state.carMsp, 10);
+      const carBasePrice = parseInt(this.state.carBasePrice, 10);
+      const { carModel } = this.state;
+      if (carMsp <= carBasePrice || carMsp <= zero || carBasePrice <= zero) {
+        alert("Price validation failed! Please try again!");
+      }
+      if (!modelPattern.test(carModel)) {
+        alert(
+          "The model name failed the validation! Please use Alpha-Numeric characers only!"
+        );
+      }
+      if (carMsp > carBasePrice && modelPattern.test(carModel)) {
+        return this.props.insertCar(
+          { id, carMsp, carModel, carBasePrice },
+          this.history
+        );
+      }
+    } else {
+      alert("You are not logged in! Please log in to continue!");
+      this.history.push("/");
+    }
+    return null;
+  };
 
   render() {
     return (
       <div className="container-fluid">
         <div className="row justify-content-center">
-          <h1 className="font-weight-light">
-            Welcome Insert Car Details {this.state.mode}!
-          </h1>
-          <br />
+          <h1 className="font-weight-light">Insert Car!</h1>
         </div>
         <div className="row justify-content-center">
-          <div className="col-6 table-responsive">
+          <h5 className="font-weight-light">You can insert new cars here!</h5>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-9 table-responsive">
             <form>
               <table className="table table-borderless">
                 <tbody>
                   <tr>
                     <td className="align-bottom">
-                      <label htmlFor="mId">
-                        <h4 className="font-weight-light">
-                          {this.state.mode} ID:
-                        </h4>
-                      </label>
-                    </td>
-                    <td>
-                      <input
-                        className="form-control input-sm"
-                        type="number"
-                        id="mId"
-                        name="mId"
-                        placeholder="Enter Manufacturer ID:"
-                        required
-                        autoFocus
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="align-bottom">
                       <label htmlFor="carModel">
                         <h4 className="font-weight-light">
-                          Enter Car Model details:
+                          Enter Car Model<span className="required">*</span>:
                         </h4>
                       </label>
                     </td>
@@ -56,24 +78,26 @@ class InsertCar extends Component {
                         id="carModel"
                         name="carModel"
                         placeholder="Eg: Maruti Suzuki Desire"
-                        required
+                        onChange={this.handleChange}
                       />
                     </td>
                   </tr>
                   <tr>
                     <td className="align-bottom">
                       <label htmlFor="carBasePrice">
-                        <h4 className="font-weight-light">Enter BasePrice</h4>
+                        <h4 className="font-weight-light">
+                          Enter BasePrice<span className="required">*</span>:
+                        </h4>
                       </label>
                     </td>
                     <td>
                       <input
                         className="form-control input-sm"
                         type="number"
-                        id="bsPrice"
-                        name="bsPrice"
-                        placeholder="Eg: Rs. 500000 "
-                        required
+                        id="carBasePrice"
+                        name="carBasePrice"
+                        placeholder="Eg: 500000 "
+                        onChange={this.handleChange}
                       />
                     </td>
                   </tr>
@@ -82,6 +106,7 @@ class InsertCar extends Component {
                       <label htmlFor="carMsp">
                         <h4 className="font-weight-light">
                           Enter Max Selling Price
+                          <span className="required">*</span>:
                         </h4>
                       </label>
                     </td>
@@ -89,10 +114,10 @@ class InsertCar extends Component {
                       <input
                         className="form-control input-sm"
                         type="number"
-                        id="mxPrice"
-                        name="mxPrice"
-                        placeholder="Eg: Rs 700000 "
-                        required
+                        id="carMsp"
+                        name="carMsp"
+                        placeholder="Eg: 700000 "
+                        onChange={this.handleChange}
                       />
                     </td>
                   </tr>
@@ -102,6 +127,7 @@ class InsertCar extends Component {
                         type="button"
                         className="btn btn-primary"
                         value="Submit"
+                        onClick={this.handleSubmit}
                       />
                     </td>
                   </tr>
@@ -110,9 +136,24 @@ class InsertCar extends Component {
             </form>
           </div>
         </div>
+        <div className="row justify-content-center">
+          <h5 className="font-weight-light">{this.props.errors.error}</h5>
+        </div>
       </div>
     );
   }
 }
 
-export default InsertCar;
+InsertCar.propTypes = {
+  states: PropTypes.object.isRequired,
+  insertCar: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  states: state.states,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { insertCar })(InsertCar);

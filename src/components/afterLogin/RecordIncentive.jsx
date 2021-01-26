@@ -30,9 +30,7 @@ class RecordIncentive extends Component {
   }
 
   handleChange = (event) =>
-    this.setState({ [event.target.name]: event.target.value }, () =>
-      console.log(this.state)
-    );
+    this.setState({ [event.target.name]: event.target.value });
 
   todaysDate = () => {
     const monthCorrector = 1;
@@ -52,7 +50,8 @@ class RecordIncentive extends Component {
     const numberPattern = /^[987][0-9]{9}$/;
     const namePattern = /^[a-zA-Z ]{3,34}$/;
     const modelPattern = /^[a-zA-Z0-9]+$/;
-    const { name, number, model, date } = this.state;
+    const { name, model, date } = this.state;
+    const number = parseInt(this.state.number, 10);
     if (id < one) {
       alert("Please log in to continue!");
       this.history.push("/");
@@ -71,8 +70,9 @@ class RecordIncentive extends Component {
         numberPattern.test(number) &&
         modelPattern.test(model)
       ) {
+        console.log(this.history);
         const object = { number, name, model, id, date };
-        this.props.recordIncentive(object, this.history);
+        return this.props.recordIncentive(object, this.history);
       }
     }
     return null;

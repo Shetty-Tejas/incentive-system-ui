@@ -62,27 +62,47 @@ class FetchAllDeal extends Component {
   renderTable = () => {
     if (this.state.mode === "dealer") {
       let count = 0;
-      return this.state.deals.map((element) => (
-        <tr key={element.dealModel}>
-          <td>{++count}</td>
-          <td>{element.dealModel}</td>
-          <td>{element.dealManufacturer}</td>
-          <td>{element.carBasePrice}</td>
-          <td>{element.carMsp}</td>
-          <td>{this.incCalc(element.carMsp, element.incentiveRange)}</td>
-          <td>{element.status}</td>
-          <td>
-            <input
-              type="button"
-              value="Delete"
-              className="btn btn-danger"
-              onClick={() => {
-                this.handleDelete(this.state.loggedId, element.dealModel);
-              }}
-            />
-          </td>
-        </tr>
-      ));
+      return (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Car Model</th>
+              <th>Car Manufacturer</th>
+              <th>Car Base Price</th>
+              <th>Car Maximum Sell Price</th>
+              <th>Incntive Range</th>
+              <th>Status</th>
+              <th>Delete?</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.deals.map((element) => (
+              <tr key={element.dealModel}>
+                <td>{++count}</td>
+                <td>{element.dealModel}</td>
+                <td>{element.dealManufacturer}</td>
+                <td>{element.carBasePrice}</td>
+                <td>{element.carMsp}</td>
+                <td>{this.incCalc(element.carMsp, element.incentiveRange)}</td>
+                <td>{element.status}</td>
+                <td>
+                  <input
+                    type="button"
+                    value="Delete"
+                    className="btn btn-danger"
+                    onClick={() => {
+                      this.handleDelete(this.state.loggedId, element.dealModel);
+                    }}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    } else if (this.state.mode === "manufacturer") {
+      return null;
     }
     return null;
   };
@@ -95,26 +115,10 @@ class FetchAllDeal extends Component {
         </div>
         <div className="row justify-content-center">
           <h5 className="font-weight-light">
-            You can find all your created deals here!
+            You can find all the created deals here!
           </h5>
         </div>
-        <div className="table-responsive">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Sr. No.</th>
-                <th>Car Model</th>
-                <th>Car Manufacturer</th>
-                <th>Car Base Price</th>
-                <th>Car Maximum Sell Price</th>
-                <th>Incntive Range</th>
-                <th>Status</th>
-                <th>Delete?</th>
-              </tr>
-            </thead>
-            <tbody>{this.renderTable()}</tbody>
-          </table>
-        </div>
+        <div className="table-responsive">{this.renderTable()}</div>
       </div>
     );
   }

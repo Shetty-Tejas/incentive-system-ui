@@ -13,7 +13,7 @@ function App() {
     <Provider store={store}>
       <Dealer history={history} />
       <Customer history={history} />
-      <Manufacturer />
+      <Manufacturer history={history} />
     </Provider>
   );
 }

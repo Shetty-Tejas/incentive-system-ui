@@ -8,7 +8,10 @@ import {
   CREATE_DEAL,
   REDEFINE_DEAL,
   DELETE_DEAL,
-  RECORD_INCENTIVE
+  RECORD_INCENTIVE,
+  FETCH_INCENTIVE,
+  INSERT_CAR,
+  ALTER_STATUS
 } from "../actions/types";
 
 const initialState = {};
@@ -38,6 +41,12 @@ const actionReducer = (state = initialState, action) => {
     case DELETE_DEAL:
       return { ...state };
     case RECORD_INCENTIVE:
+      return { ...state };
+    case FETCH_INCENTIVE:
+      return { ...state, incentives: [...action.payload] };
+    case INSERT_CAR:
+      return { ...state };
+    case ALTER_STATUS:
       return { ...state };
     default:
       return { ...state };
