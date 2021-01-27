@@ -1,4 +1,3 @@
-/* eslint-disable sort-keys */
 /* eslint-disable no-alert */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-invalid-this */

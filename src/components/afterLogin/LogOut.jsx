@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
 import React, { Component } from "react";
 import { logOut } from "../../actions/actions";
 import PropType from "prop-types";

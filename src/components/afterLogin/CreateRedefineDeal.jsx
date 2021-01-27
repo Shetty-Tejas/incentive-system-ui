@@ -5,7 +5,6 @@
 /* eslint-disable no-undefined */
 /* eslint-disable max-statements */
 /* eslint-disable class-methods-use-this */
-/* eslint-disable no-console */
 /* eslint-disable no-extra-parens */
 /* eslint-disable no-invalid-this */
 /* eslint-disable max-lines-per-function */

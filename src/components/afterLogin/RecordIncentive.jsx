@@ -1,5 +1,4 @@
 /* eslint-disable no-alert */
-/* eslint-disable no-console */
 /* eslint-disable no-extra-parens */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
@@ -70,7 +69,6 @@ class RecordIncentive extends Component {
         numberPattern.test(number) &&
         modelPattern.test(model)
       ) {
-        console.log(this.history);
         const object = { number, name, model, id, date };
         return this.props.recordIncentive(object, this.history);
       }

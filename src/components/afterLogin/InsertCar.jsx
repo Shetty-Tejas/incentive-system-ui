@@ -3,7 +3,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-invalid-this */
-/* eslint-disable class-methods-use-this */
 /* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
 import PropTypes from "prop-types";

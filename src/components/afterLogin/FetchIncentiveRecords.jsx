@@ -3,7 +3,6 @@
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-invalid-this */
 /* eslint-disable function-paren-newline */
-/* eslint-disable no-console */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -42,7 +41,6 @@ class FetchIncentiveRecords extends Component {
   };
 
   renderTable = () => {
-    console.log(this.state.incentives);
     if (this.state.incentives !== undefined && this.state.incentives !== null) {
       return this.state.incentives.map((element) => (
         <tr key={element.incentiveId}>
