@@ -1,6 +1,3 @@
-/* eslint-disable no-undefined */
-/* eslint-disable max-lines-per-function */
-/* eslint-disable no-invalid-this */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

@@ -1,8 +1,3 @@
-/* eslint-disable no-undefined */
-/* eslint-disable no-extra-parens */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable no-invalid-this */
-/* eslint-disable function-paren-newline */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

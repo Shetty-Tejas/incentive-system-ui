@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import React from "react";
 import { NavLink } from "react-router-dom";
 

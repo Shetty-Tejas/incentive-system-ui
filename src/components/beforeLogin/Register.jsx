@@ -1,10 +1,3 @@
-/* eslint-disable max-statements */
-/* eslint-disable no-alert */
-/* eslint-disable no-useless-backreference */
-/* eslint-disable prefer-named-capture-group */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable no-invalid-this */
-/* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";

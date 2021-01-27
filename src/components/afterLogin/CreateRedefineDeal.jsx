@@ -1,13 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable no-alert */
-/* eslint-disable function-paren-newline */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable no-undefined */
-/* eslint-disable max-statements */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-extra-parens */
-/* eslint-disable no-invalid-this */
-/* eslint-disable max-lines-per-function */
 import React, { Component } from "react";
 import InputRange from "react-input-range";
 import PropTypes from "prop-types";
