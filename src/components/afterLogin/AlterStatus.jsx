@@ -125,7 +125,7 @@ class AlterStatus extends Component {
           </h5>
           <div
             className="table-responsive"
-            style={{ backgroundColor: "rgb(0,0,0,0.5)" }}
+            style={{ backgroundColor: "rgb(0,0,0,0.65)" }}
           >
             <table className="table" style={{ color: "white" }}>
               <thead>

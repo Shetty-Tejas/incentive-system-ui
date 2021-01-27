@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchProfile } from "../../actions/actions";
+import cars from "../cars.jpg";
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class ProfilePage extends Component {
               <h4 className="font-weight-light">Incentive Got: </h4>
             </td>
             <td>
-              <h4 className="font-weight-light">{dealerIncentive}</h4>
+              <h4 className="font-weight-light">Rs. {dealerIncentive}</h4>
             </td>
           </tr>
         </tbody>
@@ -106,8 +107,21 @@ class ProfilePage extends Component {
   };
 
   render() {
+    const style = {
+      padding: "10px",
+      overflow: "hidden",
+      height: "100vh",
+      fontFamily: "Serif",
+      color: "black",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+      backgroundImage: `url(${cars})`,
+      backgroundColor: "white",
+      backgroundAttachment: "fixed"
+    };
     return (
-      <div className="container-fluid">
+      <div className="container-fluid" style={style}>
         <div className="row justify-content-center">
           <h1 className="font-weight-light">Profile Page!</h1>
         </div>
@@ -116,7 +130,14 @@ class ProfilePage extends Component {
         </div>
         <div className="row justify-content-center">
           <div className="col-9 table-responsive">
-            <table className="table table-borderless">
+            <table
+              className="table"
+              style={{
+                color: "Teal",
+                borderRadius: "8px",
+                backgroundColor: "white"
+              }}
+            >
               {this.renderTable()}
             </table>
           </div>
