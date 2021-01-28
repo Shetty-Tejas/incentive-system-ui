@@ -10,7 +10,7 @@ class FetchAllDeal extends Component {
     this.state = {
       deals: []
     };
-    props.fetchDeals(props.states.loggedId, this.state.mode);
+    props.fetchDeals(props.states.loggedId, props.states.loggedInMode);
   }
 
   incCalc = (msp, incRange) => {
