@@ -48,6 +48,7 @@ class FetchCustomer extends Component {
     const style = {
       padding: "10px",
       overflow: "hidden",
+      height: "100vh",
       fontFamily: "Serif",
       color: "black",
       backgroundSize: "cover",

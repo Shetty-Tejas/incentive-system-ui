@@ -72,15 +72,10 @@ class CreateRedefineDeal extends Component {
     this.setState({ incRange: value }, () => this.incCalcCallBack());
 
   selectRenderer = () => {
-    if (
-      this.props.states.cars === undefined ||
-      this.props.states.deals === undefined
-    ) {
-      return (
-        <option value="">No {this.chooser("Cars", "Deals")} Available</option>
-      );
-    }
     if (this.state.mode === "create") {
+      if (this.props.states.cars === undefined) {
+        return <option value="">No Cars Available</option>;
+      }
       const { cars } = this.props.states;
       return cars.map((element) => (
         <option key={element.carModel} value={element.carModel}>
@@ -88,6 +83,9 @@ class CreateRedefineDeal extends Component {
         </option>
       ));
     } else if (this.state.mode === "redefine") {
+      if (this.props.states.deals === undefined) {
+        return <option value="">No Deals Available</option>;
+      }
       const { deals } = this.props.states;
       return deals.map((element) => (
         <option key={element.dealModel} value={element.dealModel}>
@@ -100,6 +98,7 @@ class CreateRedefineDeal extends Component {
 
   selectChange = (event) => {
     this.setState({ model: event.target.value }, () => {
+      if (this.state.model === "") return null;
       const [car] = this.props.states.cars.filter(
         (element) => element.carModel === this.state.model
       );
