@@ -79,11 +79,13 @@ class FetchAllCars extends Component {
           <form>
             <table className="table" style={{ backgroundColor: "Tan" }}>
               <thead>
-                <th>Sr no.</th>
-                <th>Car Manufacturer</th>
-                <th>Car Model</th>
-                <th>Base Price</th>
-                <th>Maximum Selling Price</th>
+                <tr>
+                  <th>Sr no.</th>
+                  <th>Car Manufacturer</th>
+                  <th>Car Model</th>
+                  <th>Base Price</th>
+                  <th>Maximum Selling Price</th>
+                </tr>
               </thead>
               <tbody style={{ backgroundColor: "RosyBrown" }}>
                 {this.renderTable()}
@@ -98,7 +100,6 @@ class FetchAllCars extends Component {
 
 FetchAllCars.propTypes = {
   states: PropTypes.object.isRequired,
-  mode: PropTypes.string.isRequired,
   fetchCars: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
